@@ -18,11 +18,14 @@ public class Player_Behvaior : MonoBehaviour
     private CapsuleCollider _col;
     private Rigidbody _rb;
 
+    private GameBehavior _gameManager;
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent <CapsuleCollider>();
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
     }
 
     // Update is called once per frame
@@ -35,7 +38,13 @@ public class Player_Behvaior : MonoBehaviour
         this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
         */
     }
-
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Enemy")
+        {
+            _gameManager.HP -= 1;
+        }
+    }
     void FixedUpdate()
     {
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
