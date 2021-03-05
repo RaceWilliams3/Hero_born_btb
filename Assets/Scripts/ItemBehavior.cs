@@ -18,7 +18,9 @@ public class ItemBehavior : MonoBehaviour
             Destroy(this.transform.parent.gameObject);
             gameManager.Items += 1;
             Debug.Log("Item collected!");
+
         }
+        gameManager.PrintLootReport();
     }
     // Start is called before the first frame update
     
